@@ -1,6 +1,12 @@
 Aiden Hammond (811-564-610) amh37629@uga.edu
+Esther Martinez (811-692-495) em63667@uga.edu
+
+# Division of Work
+	Aiden - SortedLinkedList, NodeType, ItemType
+	Esther - LinkedListDriver
+
 # Outside Classes
-These are the classes that I used:
+These are the classes that we used:
 - Buffered reader: https://www.geeksforgeeks.org/java-io-bufferedreader-class-java/ 
 - String tokenizer: https://www.geeksforgeeks.org/stringtokenizer-class-in-java/
 - Scanner: https://www.w3schools.com/java/java_user_input.asp
@@ -17,7 +23,7 @@ This is the code used to run:
     java LinkedListDriver input.txt
 
 Replace input.txt with any file that you need.
-These are my machine specs:
+These are machine specs that this code can on:
 java 17.0.6 2023-01-17 LTS
 Java(TM) SE Runtime Environment (build 17.0.6+9-LTS-190)
 Java HotSpot(TM) 64-Bit Server VM (build 17.0.6+9-LTS-190, mixed mode, sharing)
@@ -51,5 +57,4 @@ list2 = the list we're intersecting into the first list
     4. print string.
 ### Big-O Complexity
 Since you have to iterate over both lists, with one iteration within another, it makes it O(n^2)
-
 
