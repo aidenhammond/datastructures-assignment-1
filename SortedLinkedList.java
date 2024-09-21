@@ -34,6 +34,7 @@ public class SortedLinkedList {
 		}
 		int length = 1;
 		NodeType node = head;
+		// Increase length for every node iterated over
 		while (node.next != null) {
 			length++;
 			node = node.next;
@@ -206,6 +207,8 @@ public class SortedLinkedList {
 		if (node == null) {
 			return;
 		}
+		// Iterate over incoming list and insert each item in that list
+		// insertItem handles duplicates
 		while (node != null) {
 			try {
 				_insertItem(node.info);
@@ -232,6 +235,7 @@ public class SortedLinkedList {
 		if (head == null) {
 			throw new RuntimeException("The list is empty");
 		}
+		// Handles case where theres only one item in the list
 		if (head.next == null) {
 			head = null;
 			return;
@@ -266,6 +270,7 @@ public class SortedLinkedList {
 		}
 		NodeType this_node = head;
 
+		// Iterate over both lists and add intersecting values to the string.
 		while (this_node != null) {
 			NodeType node = list.getHead();
 			while(node != null && this_node.info.getValue() >= node.info.getValue()) {
@@ -276,6 +281,7 @@ public class SortedLinkedList {
 			}
 			this_node = this_node.next;
 		}
+		// print the string
 		System.out.println("Intersection of lists: " + intersections);
 	}
 
@@ -286,6 +292,7 @@ public class SortedLinkedList {
 	public String toString() {
 		NodeType node = head;
 		String string = new String("");
+		// Iterate over values in list, add them to a string
 		while (node != null) {
 			if (node.next == null) {
 				string += (node.info.getValue());

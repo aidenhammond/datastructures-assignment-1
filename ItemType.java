@@ -1,3 +1,6 @@
+/*
+ * \brief ItemType class
+ */
 public class ItemType {
 	/*
 	 * \brief Private value held inside the ItemType object.

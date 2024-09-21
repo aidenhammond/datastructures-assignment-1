@@ -1,5 +1,12 @@
+/*
+ * \brief NodeType class
+ */
 public class NodeType {
+	
+	// Value stored in node
 	public ItemType info;
+
+	// Next node
 	public NodeType next;
 
 	/*

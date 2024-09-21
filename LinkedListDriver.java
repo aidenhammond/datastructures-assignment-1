@@ -5,6 +5,9 @@ import java.io.FileNotFoundException;
 import java.util.StringTokenizer;
 import java.util.Scanner;
 
+/*
+ * Custom exception to handle invalid errors
+ */
 class InvalidCommand extends RuntimeException {
     public InvalidCommand(String message) {
         super(message);
@@ -12,26 +15,39 @@ class InvalidCommand extends RuntimeException {
 }
 
 
+/*
+ * \brief LinkedListDriver class.
+ */
 public class LinkedListDriver {
 
+	/*
+	 * \brief List we want to persist throughout the run.
+	 */
 	public static SortedLinkedList list = new SortedLinkedList();
 
+	/*
+	 * \brief Prompts a user to enter a list
+	 */
 	public static SortedLinkedList promptUserForList() {
 		Scanner scanner = new Scanner(System.in);
 		SortedLinkedList newList = new SortedLinkedList();
 
+		// ask user for length of list
 		System.out.print("Enter the length of the new list: ");
 		int length = scanner.nextInt();
 
+		// ask user for list
 		System.out.print("Enter the numbers: ");
 		for (int i = 0; i < length; i++) {
 			int number = scanner.nextInt();
 			newList.insertItem(new ItemType(number));
 		}
 
+		// print this and that list
 		System.out.println("list 1: " + list.toString());
 		System.out.println("list 2: " + newList.toString());
 
+		// return that list
 		return newList;
 	}
 
@@ -45,11 +61,16 @@ public class LinkedListDriver {
 
 	public static void readFile(String filePath) {
 		try {
-		    BufferedReader br = new BufferedReader(new FileReader(filePath));
-		    String line = br.readLine();
-		    String[] values = line.split(" ");
-		    stringArrayToList(values);
-		    br.close();
+			// Read in file
+			BufferedReader br = new BufferedReader(new FileReader(filePath));
+			// Read in line in file
+			String line = br.readLine();
+			// Split line up by spaces
+			String[] values = line.split(" ");
+			// Convert string array to list
+			stringArrayToList(values);
+			// close the file
+			br.close();
 		} catch (FileNotFoundException e) {
 			System.out.println("Please make sure that the file that you passed in exists.");
 			System.exit(1);
@@ -59,6 +80,9 @@ public class LinkedListDriver {
 		}
 	} // readFile
 	
+	/*
+	 * \brief Print Commands
+	 */
 	public static void printCommands() {
 		System.out.println("Commands:");
 		System.out.println("(i) - Insert value");
@@ -73,6 +97,9 @@ public class LinkedListDriver {
 		System.out.println();
 	}
 
+	/*
+	 * \brief Starts the interface
+	 */
 	public static void startCLI() {
 		Scanner scanner = new Scanner(System.in);
 		boolean running = true;
@@ -80,29 +107,34 @@ public class LinkedListDriver {
 		System.out.print("Enter command: ");
 		while (running) {
 			try {
+				// handles next commands
 				handleAction(scanner.nextLine().toLowerCase());
 				System.out.print("Enter command: ");
 			}
+			// handles invalid commands
 			catch (InvalidCommand e) {
 				System.out.print("Invalid command try again: ");
 			}
 		}
 	}
 
+	/**
+	 * \brief Handles a given command 
+	 */
 	public static void handleAction(String action) throws InvalidCommand {
 		Scanner scanner;
 		switch (action) {
-			case "p":
+			case "p": // handle print
 				System.out.println("The list is: " + list.toString());
 				break;
-			case "q":
+			case "q": // handle quit
 				System.out.println("Exiting the program...");
 				System.exit(0);
 				break;
-			case "l":
+			case "l": // get length
 				System.out.println("The length of the list is " + list.getLength());
 				break;
-			case "i":
+			case "i": // insert
 				System.out.print("Enter a number to insert: ");
 				scanner = new Scanner(System.in);
 				int insertValue = scanner.nextInt();
@@ -110,7 +142,7 @@ public class LinkedListDriver {
 				list.insertItem(new ItemType(insertValue));
 				System.out.println("New list: " + list.toString());
 				break;
-			case "d":
+			case "d": // delete
 				System.out.print("Enter a number to delete: ");
 				scanner = new Scanner(System.in);
 				int deleteValue = scanner.nextInt();
@@ -121,7 +153,7 @@ public class LinkedListDriver {
 					System.out.println("New list: " + list.toString());
 				}
 				break;
-			case "s":
+			case "s": // search
 				System.out.print("Enter a number to search: ");
 				scanner = new Scanner(System.in);
 				int searchValue = scanner.nextInt();
@@ -131,7 +163,7 @@ public class LinkedListDriver {
 					System.out.println("The item is present at index " + index);
 				}
 				break;
-			case "a":
+			case "a": // delete alternate node
 				System.out.println("Original list: " + list.toString());
 				try {
 					list.deleteAlternateNodes();
@@ -142,11 +174,11 @@ public class LinkedListDriver {
 					System.out.println("Modified list: " + list.toString());
 				}
 				break;
-			case "m":
+			case "m": // merge 
 				SortedLinkedList mergeList = promptUserForList();
 				System.out.println("Merged list: " + list.toString());//list.mergeList(mergeList).toString());
 				break;
-			case "t":
+			case "t": // Intersect
 				SortedLinkedList intersectList = promptUserForList();
 				list.intersection(intersectList);
 				break;
